@@ -126,11 +126,11 @@ class UserController extends Controller {
                 }
             } else {
                 echo '<div id=session>
-                        <div id="session2">
-                            <p class="sessionP">Vous devez rentrer une adresse mail.</p>
-                            <a id="cross"><i class="fas fa-times-circle"></i></a>
-                        </div>
-                    </div>';
+                    <div id="session2">
+                        <p class="sessionP">Vous devez rentrer une adresse mail.</p>
+                        <a id="cross"><i class="fas fa-times-circle"></i></a>
+                    </div>
+                </div>';
             }
         }
         // Si un formulaire login est retourné
@@ -205,5 +205,35 @@ class UserController extends Controller {
         $formLogin->endForm();
         // On renvoie les données sur la vue login
         $this->renderFront('user/login',['loginForm' => $formLogin->create(),'registerForm'=> $formRegister->create()]);
+    }
+    // Méthod qui permet de confirmer son compte
+    public function registerConfirm($pseudo,$key) {
+        // On instancie un nouveau User
+        $user  = $this->user;
+        // On récupère les données 
+        $data = $user->findByPseudo($pseudo);
+        // On hydrate l'objet
+        $user->hydrate($data);
+        // On compare les deux clé
+        if ($user->confirmKey() === $key) {
+            // Si elle sont identique
+            $user->updateConfirm($user->id());
+            // On envoie un message 
+            echo '<div id=session>
+                <div id="session2">
+                    <p class="sessionP">Votre compte est confirmé,vous pouvez vous connecter.</p>
+                    <a id="cross"><i class="fas fa-times-circle"></i></a>
+                </div>
+            </div>';
+        } else {
+            // Si elle ne sont pas identique
+            // On envoie un message
+            echo '<div id=session>
+                <div id="session2">
+                    <p class="sessionP">Une erreur est survenue, veuillez demander un mail.</p>
+                    <a id="cross"><i class="fas fa-times-circle"></i></a>
+                </div>
+            </div>';
+        }
     }
 }
