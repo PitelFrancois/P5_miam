@@ -193,4 +193,15 @@ class RecipeController extends Controller {
             'dessertCount'=>$dessertCount
         ]);
     }
+    // Méthode qui renvoie vers la vue myrecipe
+    public function myrecipe(){
+        // On instancie un model
+        $recipe = new RecipeModel;
+        // On récupère toutes les recettes suivant sa catégorie
+        $recipes = $recipe->findAllMyRecipe($this->session->get('pseudo'));
+        // On renvoie les données sur la page myrecipe
+        $this->renderFront('recipe/myrecipe',[
+            'recipes'=>$recipes
+        ]); 
+    }
 }
