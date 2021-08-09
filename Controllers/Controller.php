@@ -11,6 +11,12 @@ abstract class Controller {
 
     private $file;
     private $title;
+	public $session;
+
+	// Constructeur
+    public function __construct() {
+        $this->session = new Session;
+    }
 
     // Renvoie le template de la view front
 	public function renderFront($template, $data = []) {
@@ -18,7 +24,8 @@ abstract class Controller {
 		$content = $this->renderFile($this->file, $data) ;
 		$view = $this->renderFile(ROOT.'/Views/Frontend/template.php', [
 				'title' => $this->title,
-				'content' => $content
+				'content' => $content,
+				'session' => $this->session
 		]) ;
         echo $view ;
 	}
@@ -31,7 +38,8 @@ abstract class Controller {
 			$content = $this->renderFile($this->file, $data) ;
 			$view = $this->renderFile($test . 'Views/Backend/templateBack.php', [
 					'title' => $this->title,
-					'content' => $content 
+					'content' => $content ,
+					'session' => $this->session 
 			]) ;
 			echo $view ;
 		} else {
