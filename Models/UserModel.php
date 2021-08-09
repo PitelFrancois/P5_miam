@@ -82,4 +82,13 @@ class UserModel extends ModelManager {
     public function confirm() {
         return $this->confirm ;
     }
+    
+    // Méthode qui récupère un élément suivant son pseudo
+	public function findByPseudo($pseudo) {
+		return $this->request("SELECT * FROM " . $this->table . " WHERE pseudo = ?",[$pseudo] )->fetch() ;
+	}
+    // Méthode qui update le confirm de l'user
+    public function updateConfirm($userId) {
+        return $this->request('UPDATE '.$this->table.' SET confirm = 2 WHERE id = ?', [$userId]);
+    }
 }

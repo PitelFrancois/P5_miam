@@ -219,21 +219,27 @@ class UserController extends Controller {
             // Si elle sont identique
             $user->updateConfirm($user->id());
             // On envoie un message 
-            echo '<div id=session>
-                <div id="session2">
-                    <p class="sessionP">Votre compte est confirmé,vous pouvez vous connecter.</p>
-                    <a id="cross"><i class="fas fa-times-circle"></i></a>
-                </div>
-            </div>';
+            $this->session->set('registerMemberOk', 
+                            '<div id=session>
+                                <div id="session2">
+                                    <p class="sessionP">Votre compte est confirmé,vous pouvez vous connecter.</p>
+                                    <a id="cross"><i class="fas fa-times-circle"></i></a>
+                                </div>
+                            </div>') ;
+            // On renvoie l'utilisateur sur la page d'accueil
+            header('Location: https://miam.fp87dev.com/');
         } else {
             // Si elle ne sont pas identique
             // On envoie un message
-            echo '<div id=session>
-                <div id="session2">
-                    <p class="sessionP">Une erreur est survenue, veuillez demander un mail.</p>
-                    <a id="cross"><i class="fas fa-times-circle"></i></a>
-                </div>
-            </div>';
+            $this->session->set('registerMemberNotOk', 
+                            '<div id=session>
+                                <div id="session2">
+                                    <p class="sessionP">Une erreur est survenue, veuillez demander un mail.</p>
+                                    <a id="cross"><i class="fas fa-times-circle"></i></a>
+                                </div>
+                            </div>') ;
+            // On renvoie l'utilisateur sur la page d'accueil
+            header('Location: https://miam.fp87dev.com/');
         }
     }
 }
