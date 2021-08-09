@@ -168,4 +168,8 @@ class RecipeModel extends ModelManager {
 	public function findAllCategorie($categorie){
 		return $result = $this->request("SELECT *,DATE_FORMAT(dateAdd, '<h4>%d</h4><span>%m</span>') AS dateAdd FROM " . $this->table . " WHERE categorie = ? ORDER BY id",[$categorie])->fetchAll();
 	}
+	// Méthode qui permet de récupérer toutes les recettes d'un utilisateur
+	public function findAllMyRecipe($pseudo){
+		return $result = $this->request("SELECT *,DATE_FORMAT(dateAdd, '<h4>%d</h4><span>%m</span>') AS dateAdd FROM " . $this->table . " WHERE pseudo = ? ORDER BY id DESC ",[$pseudo])->fetchAll();
+	}
 }
