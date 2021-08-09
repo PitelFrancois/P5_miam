@@ -113,4 +113,24 @@ class RecipeController extends Controller {
             'commentForm'=>$commentForm->create()
         ]);
     }
+    // Méthode qui renvoie vers la vue aperitif
+    public function aperitif() {
+        // On instancie un model
+        $recipe = new RecipeModel;
+        // On récupère toutes les recettes suivant sa catégorie
+        $recipes = $recipe->findAllCategorie("Apéritif");
+        // On récupère le nombre des recettes par catégorie
+        $aperitifCount = $recipe->recipeCount("Apéritif");
+        $entranceCount = $recipe->recipeCount("Entrée");
+        $mainCount = $recipe->recipeCount("Plat");
+        $dessertCount = $recipe->recipeCount("Dessert");
+        // On renvoie les données sur la page dessert
+        $this->renderFront('recipe/aperitif',[
+            'recipes'=>$recipes,
+            'entranceCount'=>$entranceCount,
+            'mainCount'=>$mainCount,
+            'aperitifCount'=>$aperitifCount,
+            'dessertCount'=>$dessertCount
+        ]);
+    }
 }
