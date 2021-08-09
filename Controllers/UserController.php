@@ -242,4 +242,14 @@ class UserController extends Controller {
             header('Location: https://miam.fp87dev.com/');
         }
     }
+
+    // Méthode pour se déconnecter
+    public function logout() {
+        // Suppression de la session
+        session_destroy();
+        // Supression du cookie auth
+        setcookie('auth','',time()-3600,'/',null,true,true);
+        // On renvoie l'utilisateur sur la page d'accueil
+        header('Location: /') ;
+    }
 }
