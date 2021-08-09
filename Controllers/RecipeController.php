@@ -153,4 +153,24 @@ class RecipeController extends Controller {
             'dessertCount'=>$dessertCount
         ]);
     }
+    // Méthode qui renvoie vers la vue plat
+    public function plat() {
+        // On instancie un model
+        $recipe = new RecipeModel;
+        // On récupère toutes les recettes suivant sa catégorie
+        $recipes = $recipe->findAllCategorie("Plat");
+        // On récupère le nombre des recettes par catégorie
+        $aperitifCount = $recipe->recipeCount("Apéritif");
+        $entranceCount = $recipe->recipeCount("Entrée");
+        $mainCount = $recipe->recipeCount("Plat");
+        $dessertCount = $recipe->recipeCount("Dessert");
+        // On renvoie les données sur la page dessert
+        $this->renderFront('recipe/main',[
+            'recipes'=>$recipes,
+            'entranceCount'=>$entranceCount,
+            'mainCount'=>$mainCount,
+            'aperitifCount'=>$aperitifCount,
+            'dessertCount'=>$dessertCount
+        ]);
+    }
 }
