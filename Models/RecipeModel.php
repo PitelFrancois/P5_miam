@@ -156,4 +156,8 @@ class RecipeModel extends ModelManager {
     public function lastRecipe($categorie) {
         return $result = $this->request("SELECT *,DATE_FORMAT(dateAdd, '<span>%d</span><p>%m</p>') AS dateAdd FROM " . $this->table . " WHERE categorie = ? AND namePicture !='' ORDER BY id DESC LIMIT 1",[$categorie])->fetch();
     }
+	// Méthode qui permet de récupérer une recette suivant son id
+    public function findById($id) {
+        return $result = $this->request("SELECT *,DATE_FORMAT(dateAdd, '<h2>%d</h2><span>%m</span>') AS dateAdd FROM " . $this->table . " WHERE id = ?",[$id])->fetch();
+    }
 }
