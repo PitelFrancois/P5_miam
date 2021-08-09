@@ -91,4 +91,8 @@ class UserModel extends ModelManager {
     public function updateConfirm($userId) {
         return $this->request('UPDATE '.$this->table.' SET confirm = 2 WHERE id = ?', [$userId]);
     }
+    // Méthode qui récupère un utilisateur via $auth
+    public function findForCookie($auth){
+        return $this->request("SELECT * FROM " . $this->table . " WHERE id = ?",[$auth[0]] )->fetch() ;
+    }
 }

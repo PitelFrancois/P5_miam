@@ -242,7 +242,6 @@ class UserController extends Controller {
             header('Location: https://miam.fp87dev.com/');
         }
     }
-
     // Méthode pour se déconnecter
     public function logout() {
         // Suppression de la session
@@ -251,5 +250,26 @@ class UserController extends Controller {
         setcookie('auth','',time()-3600,'/',null,true,true);
         // On renvoie l'utilisateur sur la page d'accueil
         header('Location: /') ;
+    }
+    // Méthode qui permet de connecter l'utilisateur automatiquement
+    public function autoLogin($auth){
+        // On instancie un nouveau User
+        $user  = $this->user;
+        // On vérifie si l'utilisateur est crée
+        $userFind = $user->findForCookie($auth);
+        // On hydrate l'objet
+        $user->hydrate($userFind);
+        // On récupère la clé
+        $key = sha1($userFind['pseudo'].$userFind['password']);
+        // On vérifie que la deux clés sont identiques
+        if ($key == $auth[1]){
+            // On enregistre ses infos dans la session
+            $this->session->set('role', $user->role()) ;
+            $this->session->set('id', $user->id()) ;
+            $this->session->set('pseudo', $user->pseudo()) ;
+            $this->session->set('mail', $user->mail()) ;
+        } else {
+            setcookie('auth','',time()-3600,'/',null,true,true);
+        }
     }
 }
