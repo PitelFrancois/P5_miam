@@ -31,9 +31,8 @@
                                             <h3><a href="/recipe/read/<?=$recipe['id'];?>"><?=$recipe['title'];?></a></h3>
                                             <ul class="post__widget">
                                                 <li>Par <span><?=$recipe['pseudo'];?></span></li>
-                                                <a href="/recipe/addIngredient/<?=$recipe['id'];?>"><li>Ajouter un ingrédient |</li></a>
-                                                <a href="/recipe/update/<?=$recipe['id'];?>"><li>Modifier ma recette |</li></a>
-                                                <a onclick="return confirm('Êtes-vous sur de vouloir supprimer cette recette ainsi que ses commentaires ?')" href="/recipe/delete/<?=$recipe['id'];?>"><li>Supprimer ma recette</li></a>
+                                                <li><a href="<?=$root;?>recipe/update/<?=$recipe['id'];?>">Modifier ma recette</a></li>
+                                                <li><a onclick="return confirm('Êtes-vous sur de vouloir supprimer cette recette ainsi que ses commentaires ?')" href="<?=$root;?>recipe/delete/<?=$recipe['id'];?>">Supprimer ma recette</a></li>
                                             </ul>
                                         </div>
                                     </div>
