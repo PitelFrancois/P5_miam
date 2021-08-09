@@ -15,9 +15,13 @@ class inputValidation {
                 };
                 if (!contactMail.value){
                     erreur = "Veuillez renseigner un mail.";
+                    this.inputBorder();
+                    contactMail.style.border = "1px solid red";
                 };
                 if (!contactName.value){
                     erreur = "Veuillez renseigner un nom.";
+                    this.inputBorder();
+                    contactName.style.border = "1px solid red";
                 };
                 if (erreur){
                     e.preventDefault();
@@ -26,6 +30,12 @@ class inputValidation {
                 };
             });
         };
+    };
+    inputBorder(){
+        let contactName = document.getElementById('contactName');
+        let contactMail = document.getElementById('contactMail');
+        contactName.style.border = "1px solid #e1e1e1";
+        contactMail.style.border = "1px solid #e1e1e1";
     };
 };
 
