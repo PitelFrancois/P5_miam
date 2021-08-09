@@ -50,5 +50,6 @@
         <script src="/Public/Frontend/js/owl.carousel.min.js"></script>
         <script src="/Public/Frontend/js/main.js"></script>
         <script src="/Public/Frontend/js/inputValidation.js"></script>
+        <script src="/Public/Frontend/js/Close.js"></script>
     </body>
 </html>
