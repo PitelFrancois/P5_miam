@@ -5,7 +5,7 @@ $(document).ready(function(){
         if (recipe != ""){
             $.ajax({
                 type: 'GET',
-                url: '/search.php',
+                url: '/Search.php',
                 data: 'recipe=' + encodeURIComponent(recipe),
                 success: function(data){
                     if (data != ""){

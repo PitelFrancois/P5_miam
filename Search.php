@@ -4,7 +4,7 @@
     if (isset($_GET['recipe'])){
         $recipe = $_GET['recipe'];
         $db = new Database;
-        $req = $db->request("SELECT * FROM miamrecipe WHERE title LIKE ? LIMIT 10",["%$recipe%"])->fetchAll();  
+        $req = $db->request("SELECT * FROM miamrecipes WHERE title LIKE ? LIMIT 10",["%$recipe%"])->fetchAll();  
         foreach ($req as $r){
         ?>
         <a href="/recipe/read/<?= $r['id'];?>"><h2 style="color:white" ><?= $r['title'];?></h2></a>
