@@ -51,5 +51,6 @@
         <script src="/Public/Frontend/js/main.js"></script>
         <script src="/Public/Frontend/js/inputValidation.js"></script>
         <script src="/Public/Frontend/js/Close.js"></script>
+        <script src="/Public/Frontend/js/Search.js"></script>
     </body>
 </html>
