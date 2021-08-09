@@ -1,7 +1,5 @@
 <!-- Titre de la page -->
-<?php $this->title = "Mes recettes"; ?>
-<!-- Affichage de message dans un popup -->
-<?= $this->session->show('addRecipe'); ?>
+<?php $this->title = "Mes recettes"; ?> 
 <!-- Categories Section Begin -->
 <section class="categories categories-grid spad">
     <div class="categories__post">
@@ -31,8 +29,8 @@
                                             <h3><a href="/recipe/read/<?=$recipe['id'];?>"><?=$recipe['title'];?></a></h3>
                                             <ul class="post__widget">
                                                 <li>Par <span><?=$recipe['pseudo'];?></span></li>
-                                                <li><a href="<?=$root;?>recipe/update/<?=$recipe['id'];?>">Modifier ma recette</a></li>
-                                                <li><a onclick="return confirm('Êtes-vous sur de vouloir supprimer cette recette ainsi que ses commentaires ?')" href="<?=$root;?>recipe/delete/<?=$recipe['id'];?>">Supprimer ma recette</a></li>
+                                                <li><a href="/recipe/update/<?=$recipe['id'];?>">Modifier ma recette</a></li>
+                                                <li><a onclick="return confirm('Êtes-vous sur de vouloir supprimer cette recette ainsi que ses commentaires ?')" href="/recipe/delete/<?=$recipe['id'];?>">Supprimer ma recette</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -47,23 +45,12 @@
                                     <h6>Nous suivre</h6>
                                 </div>
                                 <div class="sidebar__item__follow__links">
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                    <a href="#"><i class="fa fa-youtube-play"></i></a>
-                                    <a href="#"><i class="fa fa-instagram"></i></a>
-                                    <a href="#"><i class="fa fa-envelope-o"></i></a>
+                                    <a href="https://fr-fr.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a>
+                                    <a href="https://twitter.com/?lang=fr" target="_blank"><i class="fa fa-twitter"></i></a>
+                                    <a href="https://www.instagram.com/?hl=fr" target="_blank"><i class="fa fa-instagram"></i></a>
+                                    <a href="https://www.youtube.com/" target="_blank"><i class="fa fa-youtube-play"></i></a>
+                                    <a href="/contact/sendMail"><i class="fa fa-envelope-o"></i></a>
                                 </div>
-                            </div>
-                            <div class="sidebar__item__categories">
-                                <div class="sidebar__item__title">
-                                    <h6>Categories</h6>
-                                </div>
-                                <ul>
-                                    <li><a href="/recipe/aperitif">Apéritif <span><?=$aperitifCount;?></span></a></li>
-                                    <li><a href="/recipe/entree">Entrée <span><?=$entranceCount;?></span></a></li>
-                                    <li><a href="/recipe/plat">Plat <span><?=$mainCount;?></span></a></li>
-                                    <li><a href="/recipe/dessert">Dessert <span><?=$dessertCount;?></span></a></li>
-                                </ul>
                             </div>
                             <div class="sidebar__subscribe__item">
                                 <div class="sidebar__item__title">

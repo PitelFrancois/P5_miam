@@ -204,4 +204,97 @@ class RecipeController extends Controller {
             'recipes'=>$recipes
         ]); 
     }
+    // Méthode qui permet d'ajouter une recette
+    public function add(){
+        // On redifini la route
+        $root = str_replace("Public/index.php","",$_SERVER['PHP_SELF']);
+        // Si un formulaire est envoyé
+        if (Form::Validate($_POST,['formTitle','formPreparationTime','formHowManyPeople','formVegan','formCategorie','formStep','formIng'])) {
+            // On protège toutes les données reçu
+            $title = htmlspecialchars($_POST['formTitle']);
+            $preparationTime = htmlspecialchars($_POST['formPreparationTime']);
+            $cookingTime = htmlspecialchars($_POST['formCookingTime']);
+            $restTime = htmlspecialchars($_POST['formRestTime']);
+            $howManyPeople = htmlspecialchars($_POST['formHowManyPeople']);
+            $vegan = htmlspecialchars($_POST['formVegan']);
+            $category = htmlspecialchars($_POST['formCategorie']);
+            $step = htmlspecialchars($_POST['formStep']);
+            $ing = htmlspecialchars($_POST['formIng']);
+            // On instancie le model
+            $recipe = new RecipeModel;
+            // Si une photo à était envoyé
+            if(isset($_FILES)){
+                // On récupère le nom
+                $fileName = $_FILES['formPicture']['name'];
+                // On protège les données reçu avec htmlspecialchars
+                $fileName = htmlspecialchars($fileName);
+                // On récupère la taille de la photo
+                $fileSize =  $_FILES['formPicture']['size'];
+                // On récupère le chemin de la photo
+                $fileTmpName = $_FILES['formPicture']['tmp_name'];
+                // On récupère l'extension de la photo
+                $fileExtension = strrchr($fileName,'.');
+                // On fais un tri des extensions autorisées
+                $extensionAutorised = array('.jpg','.JPG','.png','.PNG','.gif','.GIF','.jpeg','.JPEG');
+                // On crée le chemin de destination de la photo
+                $fileDest = '../Public/IMG/' . $fileName;
+                // Si l'extension est autorisée
+                if (in_array($fileExtension, $extensionAutorised)) {
+                    // On vérifie le poids de la photo
+                    if ($fileSize < 700000) {
+                        if (move_uploaded_file($fileTmpName,$fileDest)) {
+                            // On hydrate recipe
+                            $recipe->setNamePicture($fileName);
+                        }
+                    }
+                }
+            }
+            // On récupère le userId
+            $userId = $this->session->get('id');
+            // On hydrate recipe
+            $recipe->setUserId($this->session->get('id'));
+            $recipe->setTitle($title);
+            $recipe->setPreparationTime($preparationTime);
+            $recipe->setCookingTime($cookingTime);
+            $recipe->setRestTime($restTime);
+            $recipe->setHowManyPeople($howManyPeople);
+            $recipe->setStep($step);
+            $recipe->setIng($ing);
+            $recipe->setVegan($vegan);
+            $recipe->setCategorie($category);
+            $recipe->setPSeudo($this->session->get('pseudo'));
+            // On crée sauvegarde dans la BDD
+            $recipe->create();
+            // On envoie un message
+            $this->session->set('addRecipe', 
+            '<div id=session>
+                <div id="session2">
+                    <p id="successAdd" class="sessionP">Votre recette a bien été crée.</p>
+                    <a id="cross"><i class="fas fa-times-circle"></i></a>
+                </div>
+            </div>') ;
+            // On renvoie l'utilisateur sur la page sur la page de ses recette
+            header("Location: " .$root."recipe/myRecipe");
+        };
+        // Création du formulaire d'ajout de recette
+        $addForm = new Form;
+        $addForm->beginForm('POST',['enctype'=>'multipart/form-data','id'=>'addForm']);
+        $addForm->addInput('text','formTitle',['placeholder'=>'Titre *','id'=>'formTitle','class'=>"d-none"]);
+        $addForm->addInput('number','formPreparationTime',['placeholder'=>'Temps de préparation *','id'=>'formPreparationTime','class'=>"d-none"]);
+        $addForm->addInput('number','formCookingTime',['placeholder'=>'Temps de cuisson','id'=>'formCookingTime','class'=>"d-none"]);
+        $addForm->addInput('number','formRestTime',['placeholder'=>'Temps de repos','id'=>'formRestTime','class'=>"d-none"]);
+        $addForm->addInput('number','formHowManyPeople',['placeholder'=>'Pour combien de personnes *','id'=>'formHowManyPeople','class'=>"d-none"]);
+        $addForm->addLabel('formVegan','Est-ce que votre recette est vegan ? *',['id'=>'formVeganLabel','class'=>"d-none"]);
+        $addForm->addSelect('formVegan',['oui'=>'oui','non'=>'non'],['id'=>'formVegan','class'=>"d-none"]);
+        $addForm->addLabel('formCategorie','Selectionner la catégorie de votre recette *',['id'=>'formCategorieLabel','class'=>"d-none"]);
+        $addForm->addSelect('formCategorie',['Apéritif'=>'Apéritif','Entrée'=>'Entrée','Plat'=>'Plat','Dessert'=>'Dessert'],['id'=>'formCategorie','class'=>"d-none"]);
+        $addForm->addTextarea('formStep','',['id'=>'formStep','class'=>"d-none"]);
+        $addForm->addTextarea('formIng','',['id'=>'formIng','class'=>"d-none"]);
+        $addForm->addI('formPicture','Voulez vous ajouter une photo à votre recette ?');
+        $addForm->addInput('file','formPicture',['accept'=>'.jpg,.JPG,.jpeg,.JPEG,.png,.PNG,.gif,.GIF','id'=>'formPicture','class'=>"d-none"]);
+        $addForm->addButton('Valider',['id'=>'addFormButton','class'=>'site-btn']);
+        $addForm->endForm();
+        // On renvoie les données dans la vue addRecipe
+        $this->renderFront('recipe/add',['addForm' => $addForm->create()]); 
+    }
 }
