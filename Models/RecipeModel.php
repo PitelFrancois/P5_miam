@@ -164,4 +164,8 @@ class RecipeModel extends ModelManager {
 	public function lastRecipeCreate() {
         return $this->request("SELECT * FROM " . $this->table . " ORDER BY id DESC LIMIT 1")->fetch();
     }
+	// Méthode qui permet de récupérer toutes les recettes suivant leurs catégories
+	public function findAllCategorie($categorie){
+		return $result = $this->request("SELECT *,DATE_FORMAT(dateAdd, '<h4>%d</h4><span>%m</span>') AS dateAdd FROM " . $this->table . " WHERE categorie = ? ORDER BY id",[$categorie])->fetchAll();
+	}
 }
