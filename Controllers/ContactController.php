@@ -12,26 +12,27 @@ class ContactController extends Controller {
     public function sendMail() {
         // Si le formulaire est retourné
         if (Form::Validate($_POST,['contactName','contactMail','contactMessage'])) {
-            // On récupère le contenu
+            // On récupère et on protège le contenu
             $name = htmlspecialchars($_POST['contactName']);
             $mail = htmlspecialchars($_POST['contactMail']);
             $message = $_POST['contactMessage'];
-            // Création d'un mail
-            $header="MIME-Version: 1.0\r\n";
-            $header.='From:"'.$name.'"<'.$mail.'>'."\n";
-            $header.='Content-Type:text/html; charset="uft-8"'."\n";
-            $header.='Content-Transfer-Encoding: 8bit';
-            // Envoie du mail
-            mail("francoispitel87@gmail.com", "Message de ". $name, $message, $header);
-            // On renvoie l'utilisateur sur la page d'accueil
-            header('Location: /');
-            // On envoie un message 
-            echo '<div id=session>
-                <div id="session2">
-                    <p class="sessionP">Votre mail a bien été envoyé.</p>
-                    <a id="cross"><i class="fas fa-times-circle"></i></a>
-                </div>
-            </div>';
+            // On vérifie que c'est bien un email qui est envoyé
+            if (filter_var($mail, FILTER_VALIDATE_EMAIL)){
+                // Création d'un mail
+                $header="MIME-Version: 1.0\r\n";
+                $header.='From:"'.$name.'"<'.$mail.'>'."\n";
+                $header.='Content-Type:text/html; charset="uft-8"'."\n";
+                $header.='Content-Transfer-Encoding: 8bit';
+                // Envoie du mail
+                mail("francoispitel87@gmail.com", "Message de ". $name, $message, $header);
+                // On envoie un message 
+                echo '<div id=session>
+                    <div id="session2">
+                        <p class="sessionP">Votre mail a bien été envoyé.</p>
+                        <a id="cross"><i class="fas fa-times-circle"></i></a>
+                    </div>
+                </div>';
+            }
         }
 
         // Création du formulaire de contact
