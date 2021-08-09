@@ -49,5 +49,6 @@
         <script src="/Public/Frontend/js/jquery.slicknav.js"></script>
         <script src="/Public/Frontend/js/owl.carousel.min.js"></script>
         <script src="/Public/Frontend/js/main.js"></script>
+        <script src="/Public/Frontend/js/inputValidation.js"></script>
     </body>
 </html>
