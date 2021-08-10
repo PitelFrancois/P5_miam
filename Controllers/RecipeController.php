@@ -33,9 +33,6 @@ class RecipeController extends Controller {
             $comment->setPseudo($pseudo);
             $comment->setComment($comments);
             $comment->create();
-            
-            // On renvoie l'utilisateur sur la page de la recette
-            header("Location: ".$root."recipe/read/". $id);
             // On envoie un message 
             echo
             '<div id=session>

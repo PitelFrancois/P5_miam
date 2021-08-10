@@ -119,7 +119,7 @@
                                 <p><?= $comment['comment']; ?></p>
                                 <?php if ($this->session->get('pseudo')) { ?>
                                     <?php if ($comment['signalComment'] == 1 ) {?>
-                                        <a href="<?=$root;?>recipe/signalComment/<?= $comment['id']?>"><i class="fas fa-exclamation-circle"></i></a>
+                                        <a href="/recipe/signalComment/<?= $comment['id']?>"><i class="fas fa-exclamation-circle"></i></a>
                                     <?php } elseif ($comment['signalComment'] == 2 ) { ?>
                                         <p>Ce commentaire a été signalé.</p>
                                     <?php } elseif ($comment['signalComment'] == 3 ) { ?> 
