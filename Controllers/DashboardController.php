@@ -52,4 +52,21 @@ class DashboardController extends Controller {
         $user->deleteUser($id);
         header("Location: /dashboard/user");
     }
+    // Méthode qui renvoie l'admin sur la vue updateUser
+    public function updateUserView($id){
+        $user = new UserModel;
+        $users = $user->findById($id);
+        $this->renderBack('dashboard/updateUserView',[
+            'users'=>$users
+        ]);
+    }
+    // Méthode qui permet à l'admin de modifier un utilisateur
+    public function updateUser($id){
+        $newMail = $_POST['mailUpdate'];
+        $newRole = $_POST['role'];
+        $newConfirm = $_POST['confirm'];
+        $user = new UserModel;
+        $user->updateUser($id,$newMail,$newRole,$newConfirm);
+        header("Location: /dashboard/user");
+    }
 }

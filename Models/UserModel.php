@@ -108,4 +108,12 @@ class UserModel extends ModelManager {
     public function deleteUser($id){
         return $this->request("DELETE FROM " . $this->table . " WHERE id = ?",[$id]);
     }
+    // Méthode qui récupère un élément suivant son id
+	public function findById($id) {
+		return $this->request("SELECT * FROM " . $this->table . " WHERE id = ?",[$id] )->fetch() ;
+	}
+    // Méthode qui permet de modifier un utilisateur
+    public function updateUser($id,$newMail,$newRole,$newConfirm){
+        return $this->request('UPDATE '.$this->table.' SET mail=?,role=?,confirm=? WHERE id = ?', [$newMail,$newRole,$newConfirm,$id]);
+    }
 }
