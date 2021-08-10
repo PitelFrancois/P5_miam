@@ -105,4 +105,10 @@ class DashboardController extends Controller {
         $recipe->updateRecipe($newUserId,$newTitle,$newPreparationTime,$newCookingTime,$newRestTime,$newHowManyPeople,$newStep,$newIng,$newPicture,$newCategorie,$newPseudo,$id);
         header("Location: /dashboard/recipe");
     }
+    // Méthode qui permet à l'admin de supprimer une recette ainsi que ses commetaires et ses ingrédients
+    public function deleteRecipe($id){
+        $recipe = new RecipeModel;
+        $recipe->deleteRecipe($id);
+        header("Location: /dashboard/recipe");
+    }
 }
