@@ -127,4 +127,8 @@ class CommentModel extends ModelManager {
     public function notPublishComments(){
         return $result = $this->request("SELECT * FROM " . $this->table . " WHERE publishComment = 1 ORDER BY id")->fetchAll();
     }
+    // Méthode qui permet de valider un nouveau commentaire
+    public function validePublishComment($id){
+        return $this->request('UPDATE '.$this->table.' SET publishComment = 2 WHERE id = ?', [$id]);
+    }
 }
