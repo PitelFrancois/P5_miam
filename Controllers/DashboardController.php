@@ -25,16 +25,14 @@ class DashboardController extends Controller {
         $usersCount = $user->userCount();
         $recipeCount = $recipe->recipeCountAll();
         $commentCount = $comment->commentCountAll();
-        $recipeNotPublishCount = $recipe->recipeNotPublishCount();
         $commentNotPublishCount = $comment->commentNotPublishCount();
         $commentSignalCount = $comment->commentSignalCount();
         $this->renderBack('dashboard/index',[
             'usersCount'=>$usersCount,
             'recipeCount'=>$recipeCount,
             'commentCount'=>$commentCount,
-            'recipeNotPublishCount'=>$recipeNotPublishCount,
             'commentNotPublishCount'=>$commentNotPublishCount,
             'commentSignalCount'=>$commentSignalCount
-            ]);
+        ]);
     }
 }

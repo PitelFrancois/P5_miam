@@ -11,19 +11,19 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
         <!-- Bootstrap Core Css -->
-        <link href="/Backend/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link href="/Public/Backend/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
         <!-- Waves Effect Css -->
-        <link href="/Backend/plugins/node-waves/waves.css" rel="stylesheet" />
+        <link href="/Public/Backend/plugins/node-waves/waves.css" rel="stylesheet" />
         <!-- Animation Css -->
-        <link href="/Backend/plugins/animate-css/animate.css" rel="stylesheet" />
+        <link href="/Public/Backend/plugins/animate-css/animate.css" rel="stylesheet" />
         <!-- Morris Chart Css-->
-        <link href="/Backend/plugins/morrisjs/morris.css" rel="stylesheet" />
+        <link href="/Public/Backend/plugins/morrisjs/morris.css" rel="stylesheet" />
         <!-- Custom Css -->
-        <link href="/Backend/css/style.css" rel="stylesheet">
+        <link href="/Public/Backend/css/style.css" rel="stylesheet">
         <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
-        <link href="/Backend/css/themes/all-themes.css" rel="stylesheet" />
+        <link href="/Public/Backend/css/themes/all-themes.css" rel="stylesheet" />
         <!-- Style -->
-        <link rel="stylesheet" href="/Frontend/css/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" href="/Public/Frontend/css/font-awesome.min.css" type="text/css">
     </head>
     <body class="theme-red">
         <!-- Page Loader -->
@@ -114,24 +114,24 @@
         </section>
 
         <!-- Jquery Core Js -->
-        <script src="/Backend/plugins/jquery/jquery.min.js"></script>
+        <script src="/Public/Backend/plugins/jquery/jquery.min.js"></script>
         <!-- Bootstrap Core Js -->
-        <script src="/Backend/plugins/bootstrap/js/bootstrap.js"></script>
+        <script src="/Public/Backend/plugins/bootstrap/js/bootstrap.js"></script>
         <!-- Select Plugin Js -->
-        <script src="/Backend/plugins/bootstrap-select/js/bootstrap-select.js"></script>
+        <script src="/Public/Backend/plugins/bootstrap-select/js/bootstrap-select.js"></script>
         <!-- Slimscroll Plugin Js -->
-        <script src="/Backend/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+        <script src="/Public/Backend/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
         <!-- Waves Effect Plugin Js -->
-        <script src="/Backend/plugins/node-waves/waves.js"></script>
+        <script src="/Public/Backend/plugins/node-waves/waves.js"></script>
         <!-- Jquery CountTo Plugin Js -->
-        <script src="/Backend/plugins/jquery-countto/jquery.countTo.js"></script>
+        <script src="/Public/Backend/plugins/jquery-countto/jquery.countTo.js"></script>
         <!-- Morris Plugin Js -->
-        <script src="/Backend/plugins/raphael/raphael.min.js"></script>
-        <script src="/Backend/plugins/morrisjs/morris.js"></script>
+        <script src="/Public/Backend/plugins/raphael/raphael.min.js"></script>
+        <script src="/Public/Backend/plugins/morrisjs/morris.js"></script>
         <!-- ChartJs -->
-        <script src="/Backend/plugins/chartjs/Chart.bundle.js"></script>
+        <script src="/Public/Backend/plugins/chartjs/Chart.bundle.js"></script>
         <!-- Custom Js -->
-        <script src="/Backend/js/admin.js"></script>
+        <script src="/Public/Backend/js/admin.js"></script>
         <!-- Font awesome -->
         <script src="https://kit.fontawesome.com/0d1298be20.js" crossorigin="anonymous"></script>
     </body>

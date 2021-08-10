@@ -33,13 +33,12 @@ abstract class Controller {
 	public function renderBack($template, $data = []) {
 		// On vérifie que l'utilisateur est un admin du site
         if ($this->session->get('role') === 2){
-			$test = str_replace('Public/', '', ROOT);
-			$this->file = $test . 'Views/Backend/' . $template . '.php';
+			$this->file = ROOT.'/Views/Backend/' . $template . '.php';
 			$content = $this->renderFile($this->file, $data) ;
-			$view = $this->renderFile($test . 'Views/Backend/templateBack.php', [
+			$view = $this->renderFile(ROOT.'/Views/Backend/template.php', [
 					'title' => $this->title,
-					'content' => $content ,
-					'session' => $this->session 
+					'content' => $content,
+					'session' => $this->session
 			]) ;
 			echo $view ;
 		} else {

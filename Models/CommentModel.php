@@ -100,4 +100,19 @@ class CommentModel extends ModelManager {
     public function signal($id) {
         return $this->request('UPDATE '.$this->table.' SET signalComment = 2 WHERE id = ?', [$id]);
     }
+    // Méthode qui récupère le nombres de commentaires 
+    public function commentCountAll() {
+		$result = $this->request("SELECT count(*) as nbComments FROM " . $this->table)->fetch();
+        return $result['nbComments'];
+	}
+    // Méthode qui récupère le nombres de commentaires non publiés
+    public function commentNotPublishCount() {
+		$result = $this->request("SELECT count(*) as nbCommentsNotPublish FROM " . $this->table . " WHERE publishComment = 1 ")->fetch();
+		return $result['nbCommentsNotPublish'];
+	}
+    // Méthode qui récupère le nombres de commentaires signalés
+    public function commentSignalCount() {
+		$result = $this->request("SELECT count(*) as nbCommentsSignal FROM " . $this->table . " WHERE signalComment = 2 ")->fetch();
+		return $result['nbCommentsSignal'];
+	}
 }

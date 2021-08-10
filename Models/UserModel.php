@@ -95,4 +95,9 @@ class UserModel extends ModelManager {
     public function findForCookie($auth){
         return $this->request("SELECT * FROM " . $this->table . " WHERE id = ?",[$auth[0]] )->fetch() ;
     }
+    // Méthode qui permet de récupérer le nombre d'utilisataur
+    public function userCount() {
+        $result = $this->request("SELECT count(*) as nbUsers FROM " . $this->table)->fetch();
+        return $result['nbUsers'];
+    }
 }
