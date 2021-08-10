@@ -111,4 +111,19 @@ class DashboardController extends Controller {
         $recipe->deleteRecipe($id);
         header("Location: /dashboard/recipe");
     }
+    /*********************************************/
+    /**                COMMENTS                 **/
+    /*********************************************/
+    
+    // Méthode qui renvoie l'admin sur la vue comment
+    public function comment() {
+        $comment = new CommentModel;
+        $comments = $comment->findAllComment();
+        $signalComments = $comment->findAllSignal();
+        $notPublishComments = $comment->notPublishComments();
+        $this->renderBack('dashboard/comment',
+            ['comments'=>$comments,
+            'signalComments'=>$signalComments,
+            'notPublishComments'=>$notPublishComments]);
+    }
 }

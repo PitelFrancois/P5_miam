@@ -115,4 +115,16 @@ class CommentModel extends ModelManager {
 		$result = $this->request("SELECT count(*) as nbCommentsSignal FROM " . $this->table . " WHERE signalComment = 2 ")->fetch();
 		return $result['nbCommentsSignal'];
 	}
+    // Méthode qui récupère tous les commentaires
+    public function findAllComment(){
+		return $result = $this->request("SELECT * FROM " . $this->table . " ORDER BY id")->fetchAll();
+	}
+    // Méthode qui récupère tous les commentaires signalés
+    public function findAllSignal() {
+        return $result = $this->request("SELECT * FROM " . $this->table . " WHERE signalComment = 2 ORDER BY id")->fetchAll();
+    }
+    // Méthode qui récupère tous les commentaires non publiés
+    public function notPublishComments(){
+        return $result = $this->request("SELECT * FROM " . $this->table . " WHERE publishComment = 1 ORDER BY id")->fetchAll();
+    }
 }
