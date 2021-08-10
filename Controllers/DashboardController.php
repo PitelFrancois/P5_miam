@@ -88,4 +88,21 @@ class DashboardController extends Controller {
             'recipes'=>$recipes
         ]);
     }
+    // Méthode qui permet à l'admin de modifier une recette
+    public function updateRecipe($id){
+        $newUserId = $_POST['userIdUpdate'];
+        $newTitle = $_POST['titleUpdate'];
+        $newPreparationTime = $_POST['preparationTimeUpdate'];
+        $newCookingTime = $_POST['cookingTimeUpdate'];
+        $newRestTime = $_POST['restTimeUpdate'];
+        $newHowManyPeople = $_POST['howManyPeopleUpdate'];
+        $newStep = $_POST['stepUpdate'];
+        $newIng = $_POST['ingUpdate'];
+        $newPicture = $_POST['pictureUpdate'];
+        $newCategorie = $_POST['categorieUpdate'];
+        $newPseudo = $_POST['pseudoUpdate'];
+        $recipe = new RecipeModel;
+        $recipe->updateRecipe($newUserId,$newTitle,$newPreparationTime,$newCookingTime,$newRestTime,$newHowManyPeople,$newStep,$newIng,$newPicture,$newCategorie,$newPseudo,$id);
+        header("Location: /dashboard/recipe");
+    }
 }

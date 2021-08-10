@@ -193,4 +193,8 @@ class RecipeModel extends ModelManager {
 	public function findAll(){
 		return $result = $this->request("SELECT * FROM " . $this->table . " ORDER BY id")->fetchAll();
 	}
+	// Méthode qui permet à l'admin de update une recette
+	public function updateRecipe($newUserId,$newTitle,$newPreparationTime,$newCookingTime,$newRestTime,$newHowManyPeople,$newStep,$newIng,$newPicture,$newCategorie,$newPseudo,$id){
+		return $this->request('UPDATE '.$this->table.' SET userId=?,title=?,preparationTime=?,cookingTime=?,restTime=?,howManyPeople=?,step=?,ing=?,namePicture=?,categorie=?,pseudo=? WHERE id = ?', [$newUserId,$newTitle,$newPreparationTime,$newCookingTime,$newRestTime,$newHowManyPeople,$newStep,$newIng,$newPicture,$newCategorie,$newPseudo,$id]);
+	}
 }
