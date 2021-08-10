@@ -189,4 +189,8 @@ class RecipeModel extends ModelManager {
 		$result = $this->request("SELECT count(*) as nbRecipes FROM " . $this->table)->fetch();
         return $result['nbRecipes'];
 	}
+	// Méthode qui permet de récupérer toutes les recettes
+	public function findAll(){
+		return $result = $this->request("SELECT * FROM " . $this->table . " ORDER BY id")->fetchAll();
+	}
 }

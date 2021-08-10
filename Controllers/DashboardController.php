@@ -69,4 +69,15 @@ class DashboardController extends Controller {
         $user->updateUser($id,$newMail,$newRole,$newConfirm);
         header("Location: /dashboard/user");
     }
+
+    /*********************************************/
+    /**                 RECIPES                 **/
+    /*********************************************/
+    
+    // Méthode qui renvoie l'admin sur la vue recipe
+    public function recipe() {
+        $recipe = new RecipeModel;
+        $recipes = $recipe->findAll();
+        $this->renderBack('dashboard/recipe',['recipes'=>$recipes]);
+    }
 }
