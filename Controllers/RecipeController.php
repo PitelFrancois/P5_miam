@@ -206,8 +206,6 @@ class RecipeController extends Controller {
     }
     // Méthode qui permet d'ajouter une recette
     public function add(){
-        // On redifini la route
-        $root = str_replace("Public/index.php","",$_SERVER['PHP_SELF']);
         // Si un formulaire est envoyé
         if (Form::Validate($_POST,['formTitle','formPreparationTime','formHowManyPeople','formVegan','formCategorie','formStep','formIng'])) {
             // On protège toutes les données reçu
@@ -274,7 +272,7 @@ class RecipeController extends Controller {
                 </div>
             </div>') ;
             // On renvoie l'utilisateur sur la page sur la page de ses recette
-            header("Location: " .$root."recipe/myRecipe");
+            header("Location: /recipe/myRecipe");
         };
         // Création du formulaire d'ajout de recette
         $addForm = new Form;
@@ -296,5 +294,33 @@ class RecipeController extends Controller {
         $addForm->endForm();
         // On renvoie les données dans la vue addRecipe
         $this->renderFront('recipe/add',['addForm' => $addForm->create()]); 
+    }
+    // Méthode qui permet de supprimer une recette et ses commentaires
+    public function delete($id){
+        // On instancie une recette
+        $newRecipe = new RecipeModel;
+        // On récupère les données
+        $data = $newRecipe->findById($id);
+        // On hydrate l'objet
+        $recipe = $newRecipe->hydrate($data);
+        // On vérifie que l'utilisateur est l'auteur de cette recette
+        if ($recipe->userId() === $this->session->get('id')){
+            // On supprime la recette ainsi que tous les commentaires liés à cette recette
+            $recipe->deleteRecipe($recipe->id());
+            // On renvoie l'utilisateur sur la page sur la page de ses recette
+            header("Location: /recipe/myrecipe");
+        // Sinon
+        } else {
+            // Sinon on renvoie l'utilisateur sur la page d'accueil avec un message d'erreur
+            $this->session->set('notAllowed', 
+                '<div id=session>
+                    <div id="session2">
+                        <p class="sessionP">Vous n\'avez les droits pour supprimer cette recette.</p>
+                        <a id="cross"><i class="fas fa-times-circle"></i></a>
+                    </div>
+                </div>') ;
+            // On renvoie l'utilisateur sur la page sur la page de ses recette
+            header("Location: /");
+        }
     }
 }

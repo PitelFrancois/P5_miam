@@ -1,7 +1,8 @@
 <!-- Titre de la page -->
 <?php $this->title = "Home"; ?>
 <!-- Messages -->
-<?= $this->session->show('registerMemberOk') ?>
+<?= $this->session->show('registerMemberOk');?>
+<?= $this->session->show('notAllowed');?>
 <!-- Section des dernières recettes par catégorie -->
 <section class="hero">
     <div class="hero__slider owl-carousel">

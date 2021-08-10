@@ -172,4 +172,8 @@ class RecipeModel extends ModelManager {
 	public function findAllMyRecipe($pseudo){
 		return $result = $this->request("SELECT *,DATE_FORMAT(dateAdd, '<h4>%d</h4><span>%m</span>') AS dateAdd FROM " . $this->table . " WHERE pseudo = ? ORDER BY id DESC ",[$pseudo])->fetchAll();
 	}
+	// Méthode qui permet de supprimer une recette via son id
+	public function deleteRecipe($id){
+		return $this->request("DELETE FROM " . $this->table . " WHERE id = ?",[$id]);
+	}
 }
