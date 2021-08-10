@@ -323,4 +323,103 @@ class RecipeController extends Controller {
             header("Location: /");
         }
     }
+    // Méthode qui permet de modifier une recette
+    public function update($id){
+        // On instancie une recette
+        $newRecipe = new RecipeModel;
+        // On récupère les données
+        $data = $newRecipe->findById($id);
+        // On hydrate l'objet
+        $recipe = $newRecipe->hydrate($data);
+        // On vérifie que l'utilisateur est l'auteur de cette recette
+        if ($recipe->userId() == $this->session->get('id')){
+            if (Form::Validate($_POST,['recipeTitle','recipePreparationTime','recipeHowManyPeople','recipeStep','recipeIng','recipeVegan','recipeCategorie'])) {
+                $newTitle = htmlspecialchars($_POST['recipeTitle']);
+                $newPreparationTime = htmlspecialchars($_POST['recipePreparationTime']);
+                $newCookingTime = htmlspecialchars($_POST['recipeCookingTime']);
+                $newRestTime = htmlspecialchars($_POST['recipeRestTime']);
+                $newHowManyPeople = htmlspecialchars($_POST['recipeHowManyPeople']);
+                $newStep = htmlspecialchars($_POST['recipeStep']);
+                $newIng = htmlspecialchars($_POST['recipeIng']);
+                $newVegan =  htmlspecialchars($_POST['recipeVegan']);
+                $newCategorie =  htmlspecialchars($_POST['recipeCategorie']);
+                // Si une photo à était envoyé
+                if(isset($_FILES)){
+                    // On récupère le nom
+                    $fileName = $_FILES['recipePicture']['name'];
+                    // On protège les données reçu avec htmlspecialchars
+                    $fileName = htmlspecialchars($fileName);
+                    // On récupère la taille de la photo
+                    $fileSize =  $_FILES['recipePicture']['size'];
+                    // On récupère le chemin de la photo
+                    $fileTmpName = $_FILES['recipePicture']['tmp_name'];
+                    // On récupère l'extension de la photo
+                    $fileExtension = strrchr($fileName,'.');
+                    // On fais un tri des extensions autorisées
+                    $extensionAutorised = array('.jpg','.JPG','.png','.PNG','.gif','.GIF','.jpeg','.JPEG');
+                    // On crée le chemin de destination de la photo
+                    $fileDest = '../Public/IMG/' . $fileName;
+                    // Si l'extension est autorisée
+                    if (in_array($fileExtension, $extensionAutorised)) {
+                        // On vérifie le poids de la photo
+                        if ($fileSize < 700000) {
+                            if (move_uploaded_file($fileTmpName,$fileDest)) {
+                                $updatePictureRecipe = new RecipeModel;
+                                $updatePictureRecipe->recipeUpdatePicture($fileName,$id);
+                            }
+                        }
+                    }   
+                }
+                $updateRecipe = new RecipeModel;
+                $updateRecipe->recipeUpdate($newTitle,$newPreparationTime,$newCookingTime,$newRestTime,$newHowManyPeople,$newStep,$newIng,$newVegan,$newCategorie,$id);
+                header("Location: /recipe/myrecipe");
+                // Sinon on renvoie l'utilisateur sur la page d'accueil avec un message d'erreur
+                $this->session->set('recipeUpdate', 
+                '<div id=session>
+                    <div id="session2">
+                        <p class="sessionP">Votre recette a bien été modifié.</p>
+                        <a id="cross"><i class="fas fa-times-circle"></i></a>
+                    </div>
+                </div>') ;
+            }
+            // Création du formualire
+            $addForm = new Form;
+            $addForm->beginForm('POST',['enctype'=>'multipart/form-data','id'=>'updateForm']);
+            $addForm->addLabel('recipeTitle','Titre*');
+            $addForm->addInput('text','recipeTitle',['value' => $recipe->title()]);
+            $addForm->addLabel('recipePreparationTime','Temps de préparation*');
+            $addForm->addInput('number','recipePreparationTime',['value' => $recipe->preparationTime()]);
+            $addForm->addLabel('recipeCookingTime','Temps de cuisson');
+            $addForm->addInput('number','recipeCookingTime',['value' => $recipe->cookingTime()]);
+            $addForm->addLabel('recipeRestTime','Temps de repos');
+            $addForm->addInput('number','recipeRestTime',['value' => $recipe->restTime()]);
+            $addForm->addLabel('recipeHowManyPeople','Pour combien de personnes ?');
+            $addForm->addInput('number','recipeHowManyPeople',['value' => $recipe->howManyPeople()]);
+            $addForm->addLabel('recipeStep','Etape*');
+            $addForm->addTextarea('recipeStep',$recipe->step());
+            $addForm->addLabel('recipeIng','Ingrédients*');
+            $addForm->addTextarea('recipeIng',$recipe->ing());
+            $addForm->addInput('file','recipePicture',['id'=>'inputFile']);
+            $addForm->addLabel('recipeVegan','Est-ce que votre recette est vegan ? *');
+            $addForm->addSelect('recipeVegan',[$recipe->vegan() => $recipe->vegan(),'oui'=>'oui','non'=>'non']);
+            $addForm->addLabel('recipeCategorie','Selectionner la catégorie de votre recette *');
+            $addForm->addSelect('recipeCategorie',[$recipe->categorie() => $recipe->categorie(),'Apéritif'=>'Apéritif','Entrée'=>'Entrée','Plat'=>'Plat','Dessert'=>'Dessert']);
+            $addForm->addButton('Modifier',['class'=>'site-btn']);
+            $addForm->endForm();
+            // On renvoi les données sur la vue update
+            $this->renderFront('recipe/update',
+            ['recipe' => $recipe,
+            'addUpdate' => $addForm->create()]);
+        } else {
+            // Sinon on renvoie l'utilisateur sur la page d'accueil avec un message d'erreur
+            $this->session->set('notAllowed', 
+                '<div id=session>
+                    <div id="session2">
+                        <p class="sessionP">Vous n\'avez les droits pour modifier cette recette.</p>
+                        <a id="cross"><i class="fas fa-times-circle"></i></a>
+                    </div>
+                </div>') ;
+            header("Location: /");
+        }
+    }
 }

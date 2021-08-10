@@ -176,4 +176,12 @@ class RecipeModel extends ModelManager {
 	public function deleteRecipe($id){
 		return $this->request("DELETE FROM " . $this->table . " WHERE id = ?",[$id]);
 	}
+	// Méthode qui permet à l'utilisateur de update une photo de sa recette
+	public function recipeUpdatePicture($fileName,$id){
+		return $this->request('UPDATE '.$this->table.' SET namePicture=? WHERE id = ?', [$fileName,$id]);
+	}
+	// Méthode qui permet à l'utilisateur de update sa recette
+	public function recipeUpdate($newTitle,$newPreparationTime,$newCookingTime,$newRestTime,$newHowManyPeople,$newStep,$newIng,$newVegan,$newCategorie,$id){
+		return $this->request('UPDATE '.$this->table.' SET title=?,preparationTime=?,cookingTime=?,restTime=?,howManyPeople=?,step=?,ing=?,vegan=?,categorie=? WHERE id = ?', [$newTitle,$newPreparationTime,$newCookingTime,$newRestTime,$newHowManyPeople,$newStep,$newIng,$newVegan,$newCategorie,$id]);
+	}
 }
