@@ -91,10 +91,6 @@
                                 <i class="material-icons">forum</i>
                                 <span>Commentaires</span>
                             </a>
-                            <a href="/dashboard/ingredient">
-                                <i class="material-icons">view_list</i>
-                                <span>Ingrédients</span>
-                            </a>
                         </li>
                     </ul>
                 </div>
