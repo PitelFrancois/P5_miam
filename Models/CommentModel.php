@@ -135,4 +135,8 @@ class CommentModel extends ModelManager {
     public function valideSignalComment($id){
         return $this->request('UPDATE '.$this->table.' SET signalComment = 3 WHERE id = ?', [$id]);
     }
+    // Méthode qui supprime un commentaire via son id
+    public function deleteComment($id){
+        return $this->request("DELETE FROM " . $this->table . " WHERE id = ?",[$id]);
+    }
 }

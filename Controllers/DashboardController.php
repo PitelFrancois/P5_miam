@@ -138,4 +138,10 @@ class DashboardController extends Controller {
         $comment->valideSignalComment($id);
         header("Location: /dashboard/comment");
     }
+    // Méthode qui permet à l'admin de supprimer un commentaire
+    public function deleteComment($id){
+        $comment = new CommentModel;
+        $comment->deleteComment($id);
+        header("Location: /dashboard/comment");
+    }
 }
