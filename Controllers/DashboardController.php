@@ -63,10 +63,11 @@ class DashboardController extends Controller {
     // Méthode qui permet à l'admin de modifier un utilisateur
     public function updateUser($id){
         $newMail = $_POST['mailUpdate'];
+        $newPseudo = $_POST['pseudoUpdate'];
         $newRole = $_POST['role'];
         $newConfirm = $_POST['confirm'];
         $user = new UserModel;
-        $user->updateUser($id,$newMail,$newRole,$newConfirm);
+        $user->updateUser($id,$newMail,$newPseudo,$newRole,$newConfirm);
         header("Location: /dashboard/user");
     }
 

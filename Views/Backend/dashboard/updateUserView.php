@@ -12,6 +12,12 @@
                             <input type="text" name="mailUpdate" class="form-control" value="<?= $users['mail'];?>">
                         </div>
                     </div>
+                    <label for="pseudoUpdate">Pseudo</label>
+                    <div class="form-group">
+                        <div class="form-line">
+                            <input type="text" name="pseudoUpdate" class="form-control" value="<?= $users['pseudo'];?>">
+                        </div>
+                    </div>
                     <label for="role">Role</label>
                     <div class="form-group">
                         <div class="form-line">

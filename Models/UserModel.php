@@ -113,7 +113,7 @@ class UserModel extends ModelManager {
 		return $this->request("SELECT * FROM " . $this->table . " WHERE id = ?",[$id] )->fetch() ;
 	}
     // Méthode qui permet de modifier un utilisateur
-    public function updateUser($id,$newMail,$newRole,$newConfirm){
-        return $this->request('UPDATE '.$this->table.' SET mail=?,role=?,confirm=? WHERE id = ?', [$newMail,$newRole,$newConfirm,$id]);
+    public function updateUser($id,$newMail,$newPseudo,$newRole,$newConfirm){
+        return $this->request('UPDATE '.$this->table.' SET mail=?,pseudo=?,role=?,confirm=? WHERE id = ?', [$newMail,$newPseudo,$newRole,$newConfirm,$id]);
     }
 }
