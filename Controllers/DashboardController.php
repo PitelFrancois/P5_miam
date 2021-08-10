@@ -132,4 +132,10 @@ class DashboardController extends Controller {
         $comment->validePublishComment($id);
         header("Location: /dashboard/comment");
     }
+    // Méthode qui permet à l'admin de valider un commentaire signalé
+    public function valideSignalComment($id){
+        $comment = new CommentModel;
+        $comment->valideSignalComment($id);
+        header("Location: /dashboard/comment");
+    }
 }

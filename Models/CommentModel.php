@@ -131,4 +131,8 @@ class CommentModel extends ModelManager {
     public function validePublishComment($id){
         return $this->request('UPDATE '.$this->table.' SET publishComment = 2 WHERE id = ?', [$id]);
     }
+    // Méthode qui permet de valider un commentaire signalé
+    public function valideSignalComment($id){
+        return $this->request('UPDATE '.$this->table.' SET signalComment = 3 WHERE id = ?', [$id]);
+    }
 }
