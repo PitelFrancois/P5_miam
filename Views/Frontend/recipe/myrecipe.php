@@ -1,5 +1,6 @@
 <!-- Titre de la page -->
 <?php $this->title = "Mes recettes"; ?> 
+<?= $this->session->show('addRecipe'); ?>
 <!-- Categories Section Begin -->
 <section class="categories categories-grid spad">
     <div class="categories__post">
