@@ -22,7 +22,7 @@ class RecipeModel extends ModelManager {
 	protected $namePicture;
 
 	public function __construct() {
-    	$this->table = "miamrecipes" ;
+    	$this->table = "recipes" ;
     }
 
     // Liste de setters

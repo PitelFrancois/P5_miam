@@ -15,7 +15,7 @@ class CommentModel extends ModelManager {
     protected $signalComment;
 
     public function __construct() {
-    	$this->table = "miamcomments" ;
+    	$this->table = "comments" ;
     }
 
     // Liste de setters

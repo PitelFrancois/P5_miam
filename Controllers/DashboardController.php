@@ -46,4 +46,10 @@ class DashboardController extends Controller {
         $users = $user->findAll();
         $this->renderBack('dashboard/user',['users'=>$users]);
     }
+    // Méthode qui permet à l'admin de supprimer un utilisateur ainsi que ses recettes,ses commentaires et ses ingrédients
+    public function deleteUser($id){
+        $user = new UserModel;
+        $user->deleteUser($id);
+        header("Location: /dashboard/user");
+    }
 }

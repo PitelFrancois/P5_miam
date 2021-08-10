@@ -15,7 +15,7 @@ class UserModel extends ModelManager {
     protected $confirm;
 
     public function __construct() {
-    	$this->table = "miammembers" ;
+    	$this->table = "users" ;
     }
 
     // Liste des setters
@@ -103,5 +103,9 @@ class UserModel extends ModelManager {
     // Méthode qui récupère tout les membres
     public function findAll() {
         return $this->request("SELECT * FROM " . $this->table . " ORDER BY id")->fetchAll() ;
+    }
+    // Méthode qui permet de supprimer un utilisateur
+    public function deleteUser($id){
+        return $this->request("DELETE FROM " . $this->table . " WHERE id = ?",[$id]);
     }
 }
