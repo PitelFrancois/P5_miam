@@ -80,4 +80,12 @@ class DashboardController extends Controller {
         $recipes = $recipe->findAll();
         $this->renderBack('dashboard/recipe',['recipes'=>$recipes]);
     }
+    // Méthode qui renvoie l'admin sur la vue updateRecipe
+    public function updateRecipeView($id){
+        $recipe = new RecipeModel;
+        $recipes = $recipe->findById($id);
+        $this->renderBack('dashboard/updateRecipeView',[
+            'recipes'=>$recipes
+        ]);
+    }
 }
