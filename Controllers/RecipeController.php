@@ -419,4 +419,25 @@ class RecipeController extends Controller {
             header("Location: /");
         }
     }
+    // Méthode qui permet de signaler un commentaire vis son id
+    public function signalComment($id) {
+        // On instancie un model
+        $comment = new CommentModel;
+        // On récupère le commentaire via son id
+        $data = $comment->findById($id);
+        // On hydrate l'objet
+        $comments = $comment->hydrate($data);
+        // On signal le commentaire
+        $signalComment = $comment->signal($comments->id());
+        // On envoie un message
+        $this->session->set('signalComment', 
+        '<div id=session>
+            <div id="session2">
+                <p class="sessionP">Le commentaire a bien été signalé.</p>
+                <a id="cross"><i class="fas fa-times-circle"></i></a>
+            </div>
+        </div>') ;
+        // On renvoie l'utilisateur sur la vue home
+        header('Location: /recipe/read/'. $comments->recipeId().'#comment');
+    }
 }

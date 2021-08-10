@@ -2,7 +2,7 @@
 <?php $this->title = $recipe->title(); ?>
 <!-- Affichage de message dans un popup -->
 <?= $this->session->show('newComment')?> 
-<?= $this->session->show('signalComment')?> 
+<?= $this->session->show('signalComment')?>
 <!-- Section d'une recette -->
 <section class="single-post spad">
     <?php if ($recipe->namePicture() != ""){ ?>
@@ -107,7 +107,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="single-post__comment">
+                <div id="comment" class="single-post__comment">
                     <div class="widget__title">
                         <h4><?= $commentCount ?> commentaires</h4>
                     </div>

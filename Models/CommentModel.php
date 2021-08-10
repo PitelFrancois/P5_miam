@@ -87,10 +87,17 @@ class CommentModel extends ModelManager {
         $result = $this->request('SELECT * FROM ' . $this->table . " WHERE recipeId = ? AND publishComment = 2",[$id] )->fetchAll();
         return $result;
     }
-
     // Méthode qui permet de récupérer le nombre de commentaire d'une recette
     public function commentCount($id) {
         $result = $this->request("SELECT count(*) as nbComment FROM " . $this->table . " WHERE recipeId = ? AND publishComment = 2",[$id] )->fetch();
         return $result['nbComment'];
+    }
+    // Méthode qui permet de récupérer un commentaire suivant son id
+    public function findById($id) {
+        return $result = $this->request("SELECT * FROM " . $this->table . " WHERE id = ?",[$id])->fetch();
+    }
+    // Méthode qui permet de signaler un commentaire
+    public function signal($id) {
+        return $this->request('UPDATE '.$this->table.' SET signalComment = 2 WHERE id = ?', [$id]);
     }
 }
