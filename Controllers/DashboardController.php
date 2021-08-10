@@ -35,4 +35,15 @@ class DashboardController extends Controller {
             'commentSignalCount'=>$commentSignalCount
         ]);
     }
+
+    /*********************************************/
+    /**                  USERS                  **/
+    /*********************************************/
+
+    // Méthode qui renvoie l'admin sur la vue user
+    public function user() {
+        $user = new UserModel;
+        $users = $user->findAll();
+        $this->renderBack('dashboard/user',['users'=>$users]);
+    }
 }

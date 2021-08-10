@@ -100,4 +100,8 @@ class UserModel extends ModelManager {
         $result = $this->request("SELECT count(*) as nbUsers FROM " . $this->table)->fetch();
         return $result['nbUsers'];
     }
+    // Méthode qui récupère tout les menbres
+    public function findAll() {
+        return $this->request("SELECT * FROM " . $this->table . " ORDER BY id")->fetchAll() ;
+    }
 }
