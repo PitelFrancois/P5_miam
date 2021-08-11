@@ -9,13 +9,13 @@
             <?php if ($this->session->get('role') == 1) { ?>
                 <li class="active"><a href="/">Home</a></li>
                 <li class=""><a href="/recipe/myrecipe">Mes recettes</a></li>
-                <li class=""><a href="/recipe/add"><i class="fas fa-plus"></i></a></li>
+                <li class=""><a href="/recipe/add">Ajouter une recette</a></li>
                 <li class=""><a href="/contact/sendMail">Contact</a></li>
                 <li class=""><a href="/user/logout">Deconnexion</a></li>
             <?php } elseif ($this->session->get('role') == 2) { ?>
                 <li class="active"><a href="/">Home</a></li>
                 <li class=""><a href="/recipe/myrecipe">Mes recettes</a></li>
-                <li class=""><a href="/recipe/add"><i class="fas fa-plus"></i></a></li>
+                <li class=""><a href="/recipe/add">Ajouter une recette</a></li>
                 <li class=""><a href="/contact/sendMail">Contact</a></li>
                 <li class=""><a href="/dashboard">Dashboard</a></li>
                 <li class=""><a href="/user/logout">Deconnexion</a></li>
@@ -73,13 +73,13 @@
                             <?php if ($this->session->get('role') == 1) { ?>
                                 <li class="active"><a href="/">Home</a></li>
                                 <li class=""><a href="/recipe/myrecipe">Mes recettes</a></li>
-                                <li class=""><a href="/recipe/add"><i class="fas fa-plus"></i></a></li>
+                                <li title="Ajouter une recette" class=""><a href="/recipe/add"><i class="fas fa-plus"></i></a></li>
                                 <li class=""><a href="/contact/sendMail">Contact</a></li>
                                 <li class=""><a href="/user/logout">Deconnexion</a></li>
                             <?php } elseif ($this->session->get('role') == 2) { ?>
                                 <li class="active"><a href="/">Home</a></li>
                                 <li class=""><a href="/recipe/myrecipe">Mes recettes</a></li>
-                                <li class=""><a href="/recipe/add"><i class="fas fa-plus"></i></a></li>
+                                <li title="Ajouter une recette" class=""><a href="/recipe/add"><i class="fas fa-plus"></i></a></li>
                                 <li class=""><a href="/contact/sendMail">Contact</a></li>
                                 <li class=""><a href="/dashboard">Dashboard</a></li>
                                 <li class=""><a href="/user/logout">Deconnexion</a></li>
