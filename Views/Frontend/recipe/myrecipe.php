@@ -12,7 +12,9 @@
                         <div class="categories__list__post__item">
                             <div class="row">
                                 <?php if (!$recipes){?>
-                                    <h3>Vous n'avez pas encore créé de recette.</h3>
+                                    <h2>Vous n'avez pas encore créé de recette.</h2>
+                                    <h4 class="mt-4">Ajouter votre première recette.</h4>
+                                    <a href="/recipe/add"><button class="site-btn ml-2 mt-3">Ajouter une recette</button></a>
                                 <?php } else { foreach ($recipes as $recipe):?>
                                     <div class="col-lg-6 col-md-6 mb-3">
                                         <a href="/recipe/read/<?=$recipe['id'];?>">
