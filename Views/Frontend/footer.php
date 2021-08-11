@@ -50,8 +50,8 @@
                 </div>
                 <div class="footer__copyright">
                     <a href="/mentionsLegales"><p>Mentions légales</p></a>
-                    <p>Ce site a été crée dans le cadre d'un projet Openclassroom.</p>
-                    <p>Certaines photos viennent du site <a target="_blank" href="https://www.cuisineaz.com/tous-en-cuisine-avec-cyril-lignac-les-recettes-en-direct-p395">CuisineAZ</a></p>
+                    <p>Ce site a été créé dans le cadre d'un projet Openclassroom.</p>
+                    <p>Certaines photos proviennent du site <a target="_blank" href="https://www.cuisineaz.com/tous-en-cuisine-avec-cyril-lignac-les-recettes-en-direct-p395">CuisineAZ</a></p>
                 </div>
             </div>
         </div>

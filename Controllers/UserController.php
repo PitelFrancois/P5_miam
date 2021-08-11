@@ -85,7 +85,7 @@ class UserController extends Controller {
                                 $user->create();
                                 echo '<div id=session>
                                     <div id="session2">
-                                        <p class="sessionP">Vous êtes bien inscrit,vous allez recevoir un mail afin de valider votre compte.</p>
+                                        <p class="sessionP">Vous êtes bien inscrit, vous allez recevoir un mail afin de valider votre compte.</p>
                                         <a id="cross"><i class="fas fa-times-circle"></i></a>
                                     </div>
                                 </div>';
@@ -223,7 +223,7 @@ class UserController extends Controller {
             $this->session->set('registerMemberOk', 
                             '<div id=session>
                                 <div id="session2">
-                                    <p class="sessionP">Votre compte est confirmé,vous pouvez vous connecter.</p>
+                                    <p class="sessionP">Votre compte est confirmé, vous pouvez vous connecter.</p>
                                     <a id="cross"><i class="fas fa-times-circle"></i></a>
                                 </div>
                             </div>') ;
