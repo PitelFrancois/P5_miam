@@ -281,7 +281,18 @@ class RecipeController extends Controller {
                     <p id="successAdd" class="sessionP">Votre recette a bien été crée.</p>
                     <a id="cross"><i class="fas fa-times-circle"></i></a>
                 </div>
-            </div>') ;
+            </div>
+            <script type="text/javascript">
+                window.localStorage.removeItem("howManyPeople");
+                window.localStorage.removeItem("ings");
+                window.localStorage.removeItem("pseudo");
+                window.localStorage.removeItem("preparationTime");
+                window.localStorage.removeItem("title");
+                window.localStorage.removeItem("vegan");
+                window.localStorage.removeItem("steps");
+                window.localStorage.removeItem("category");
+                window.localStorage.removeItem("currentPage");
+            </script>') ;
             // On renvoie l'utilisateur sur la page sur la page de ses recette
             header("Location: /recipe/myRecipe");
         };
