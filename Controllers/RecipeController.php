@@ -285,7 +285,6 @@ class RecipeController extends Controller {
             <script type="text/javascript">
                 window.localStorage.removeItem("howManyPeople");
                 window.localStorage.removeItem("ings");
-                window.localStorage.removeItem("pseudo");
                 window.localStorage.removeItem("preparationTime");
                 window.localStorage.removeItem("title");
                 window.localStorage.removeItem("vegan");

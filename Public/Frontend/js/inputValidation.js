@@ -2,6 +2,7 @@ class inputValidation {
     constructor(){
         this.contactValidation();
         this.registerValidation();
+        this.loginValidation();
     };
 
     contactValidation(){
@@ -110,6 +111,31 @@ class inputValidation {
         let contactMail = document.getElementById('contactMail');
         contactName.style.border = "1px solid #e1e1e1";
         contactMail.style.border = "1px solid #e1e1e1";
+    };
+    loginValidation(){
+        let loginPseudo = document.getElementById('loginPseudo');
+        let loginButton = document.getElementById('loginButton');
+        let loginPassword = document.getElementById('loginPassword');
+        if (loginButton != null){
+            loginButton.addEventListener('click',(e)=>{
+                let erreur;
+                let pseudoValue = loginPseudo.value;
+                let index = pseudoValue.indexOf("@");
+                if (!loginPassword.value){
+                    erreur = "Veuillez renseigner un mot de passe.";
+                };
+                if (index !== -1){
+                    erreur = "Pour vous connecter, veuillez rentrer votre pseudo et non votre adresse mail.";
+                }
+                if (!loginPseudo.value){            
+                    erreur = "Veuillez renseigner un pseudo.";      
+                };
+                if (erreur){
+                    e.preventDefault();
+                    document.getElementById('erreurLogin').innerHTML = erreur;
+                };
+            });
+        };
     };
 };
 
