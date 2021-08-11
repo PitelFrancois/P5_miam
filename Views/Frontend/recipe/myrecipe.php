@@ -11,7 +11,9 @@
                     <div class="col-lg-8 col-md-8">
                         <div class="categories__list__post__item">
                             <div class="row">
-                                <?php foreach ($recipes as $recipe): ?> 
+                                <?php if (!$recipes){?>
+                                    <h3>Vous n'avez pas encore créé de recette.</h3>
+                                <?php } else { foreach ($recipes as $recipe):?>
                                     <div class="col-lg-6 col-md-6 mb-3">
                                         <a href="/recipe/read/<?=$recipe['id'];?>">
                                             <?php if ($recipe['namePicture'] != ""){ ?>
@@ -36,7 +38,7 @@
                                             </ul>
                                         </div>
                                     </div>
-                                <?php endforeach; ?>
+                                <?php endforeach;  } ?>
                             </div>
                         </div>
                     </div>    
