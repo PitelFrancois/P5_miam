@@ -11,24 +11,14 @@
             <div class="signin__form">
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item">
-                        <a id="login" class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab" aria-selected="false">Connexion</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="register" class="nav-link" data-toggle="tab" href="#tabs-2" role="tab" aria-selected="false">S'inscrire</a>
+                        <a class="nav-link active" data-toggle="tab" role="tab" aria-selected="false">Nouveau mot de passe</a>
                     </li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="tabs-1" role="tabpanel">
                         <div class="signin__form__text">
-                            <?= $loginForm; ?>
-                            <p id="erreurLogin" style="color:red;margin-top:10px;"></p>
-                            <a href="/user/forgotPassword"><p>Mot de passe oublié ?</p></a>
-                        </div>
-                    </div>
-                    <div class="tab-pane" id="tabs-2" role="tabpanel">
-                        <div class="signin__form__text">
-                            <?= $registerForm; ?>
-                            <p id="erreurRegister" style="color:red;margin-top:10px;"></p>
+                            <?= $formPassword; ?>
+                            <p id="erreurPassword" style="color:red;margin-top:10px;"></p>
                         </div>
                     </div>
                 </div>

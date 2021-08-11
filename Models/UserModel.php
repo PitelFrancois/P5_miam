@@ -116,4 +116,12 @@ class UserModel extends ModelManager {
     public function updateUser($id,$newMail,$newPseudo,$newRole,$newConfirm){
         return $this->request('UPDATE '.$this->table.' SET mail=?,pseudo=?,role=?,confirm=? WHERE id = ?', [$newMail,$newPseudo,$newRole,$newConfirm,$id]);
     }
+    // Méthode qui récupère un élément suivant son pseudo
+	public function findByMail($mail) {
+		return $this->request("SELECT * FROM " . $this->table . " WHERE mail = ?",[$mail] )->fetch() ;
+	}
+    // Méthode qui permet de modifier un mot de passe
+    public function updatePassword($passwordHach,$id) {
+        return $this->request('UPDATE '.$this->table.' SET password = ? WHERE id = ?', [$passwordHach,$id]);
+    }
 }

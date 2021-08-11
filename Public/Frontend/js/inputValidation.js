@@ -3,6 +3,7 @@ class inputValidation {
         this.contactValidation();
         this.registerValidation();
         this.loginValidation();
+        this.forgotPasswordValidation();
     };
 
     contactValidation(){
@@ -136,6 +137,57 @@ class inputValidation {
                 };
             });
         };
+    };
+    forgotPasswordValidation(){
+        let passwordButton = document.getElementById('passwordButton');
+        let passwordMail = document.getElementById('passwordMail');
+        let newPassword = document.getElementById('newPassword');
+        let newPassword2 = document.getElementById('newPassword2');
+        if (passwordButton != null){
+            passwordButton.addEventListener('click',(e)=>{
+                let erreur;
+                let mailValue = passwordMail.value;
+                let index = mailValue.indexOf("@");
+                if (newPassword.value != newPassword2.value){
+                    erreur = "Les mots de passe ne sont pas identiques.";
+                    this.inputPasswordBorder();
+                    newPassword.style.border = "1px solid red";
+                    newPassword2.style.border = "1px solid red";
+                };
+                if (!newPassword2.value){
+                    erreur = "Veuillez confirmer votre mot de passe.";
+                    this.inputPasswordBorder();
+                    newPassword2.style.border = "1px solid red";
+                };
+                if (!newPassword.value){
+                    erreur = "Veuillez renseigner un mot de passe.";
+                    this.inputPasswordBorder();
+                    newPassword.style.border = "1px solid red";
+                };
+                if (index == -1){
+                    erreur = "Veuillez renseigner une adresse mail.";
+                    this.inputPasswordBorder();
+                    passwordMail.style.border = "1px solid red";
+                }
+                if (!passwordMail.value){
+                    erreur = "Veuillez renseigner un mail.";
+                    this.inputPasswordBorder();
+                    passwordMail.style.border = "1px solid red";
+                };
+                if (erreur){
+                    e.preventDefault();
+                    document.getElementById('erreurPassword').innerHTML = erreur;
+                };
+            });
+        };
+    };
+    inputPasswordBorder(){
+        let passwordMail = document.getElementById('passwordMail');
+        let newPassword = document.getElementById('newPassword');
+        let newPassword2 = document.getElementById('newPassword2');
+        passwordMail.style.border = "1px solid #e1e1e1";
+        newPassword.style.border = "1px solid #e1e1e1";
+        newPassword2.style.border = "1px solid #e1e1e1";
     };
 };
 

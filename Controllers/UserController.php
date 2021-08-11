@@ -28,6 +28,7 @@ class UserController extends Controller {
             $mail2 = htmlspecialchars($_POST['registerMail2']);
             $password = htmlspecialchars($_POST['registerPassword']);
             $password2 = htmlspecialchars($_POST['registerPassword2']);
+            // On vérifie qu'il sagit bien d'une adresse mail
             if (filter_var($mail, FILTER_VALIDATE_EMAIL)){
                 // On instancie un UserModel
                 $user = new UserModel;
@@ -189,8 +190,8 @@ class UserController extends Controller {
         $formRegister = new Form;
         $formRegister->beginForm('POST',['id'=>'formRegister']);
         $formRegister->addInput('text','registerPseudo',['placeholder'=>'Pseudo','id'=>'registerPseudo']);
-        $formRegister->addInput('text','registerMail',['placeholder'=>'Mail','id'=>'registerMail']);
-        $formRegister->addInput('text','registerMail2',['placeholder'=>'Confirmer votre mail','id'=>'registerMail2']);
+        $formRegister->addInput('mail','registerMail',['placeholder'=>'Mail','id'=>'registerMail']);
+        $formRegister->addInput('mail','registerMail2',['placeholder'=>'Confirmer votre mail','id'=>'registerMail2']);
         $formRegister->addInput('password','registerPassword',['placeholder'=>'Mot de passe','id'=>'registerPassword']);
         $formRegister->addInput('password','registerPassword2',['placeholder'=>'Confirmer votre mot de passe','id'=>'registerPassword2']);
         $formRegister->addButton('S\'inscrire',['class'=>'site-btn']);
@@ -271,5 +272,76 @@ class UserController extends Controller {
         } else {
             setcookie('auth','',time()-3600,'/',null,true,true);
         }
+    }
+    // Méthode qui permet de modifier son mot de passe
+    public function forgotPassword(){
+        if (Form::Validate($_POST,['passwordMail','password','password2'])){
+            // On protège les données reçu avec htmlspecialchars
+            $mail = htmlspecialchars($_POST['passwordMail']);
+            $password = htmlspecialchars($_POST['password']);
+            $password2 = htmlspecialchars($_POST['password2']);
+            // On vérifie qu'il sagit bien d'une adresse mail
+            if (filter_var($mail, FILTER_VALIDATE_EMAIL)){
+                // On instancie un UserModel
+                $user = new UserModel;
+                // On récupère l'utilisateur
+                $mailFind = $user->findByMail($mail);
+                $user->hydrate($mailFind);
+                // On vérifie si le mail est utilisé
+                $mailVerif = $user->verification("mail",$mail);
+                // si oui
+                if ($mailVerif === 1){
+                    // On vérifie que les deux mot de passe sont identiques
+                    if ($password === $password2) {
+                        // On hache le mot de passe
+                        $passwordHach = password_hash($password, PASSWORD_DEFAULT);
+                        // On update le mot de passe
+                        $user->updatePassword($passwordHach,$user->id());
+                        header("Location: /");
+                        // On envoi un message
+                        $this->session->set('newPasswordOk', 
+                            '<div id=session>
+                                <div id="session2">
+                                    <p class="sessionP">Votre mot de passe à bien été modifié.</p>
+                                    <a id="cross"><i class="fas fa-times-circle"></i></a>
+                                </div>
+                            </div>') ;
+                    } else {
+                        // Sinon on envoie un message d'alerte
+                        echo '<div id=session>
+                            <div id="session2">
+                                <p class="sessionP">Les mot de passe ne sont pas identique.</p>
+                                <a id="cross"><i class="fas fa-times-circle"></i></a>
+                            </div>
+                        </div>';
+                    }
+                // Sinon on envoi un message
+                } else {
+                    echo '<div id=session>
+                        <div id="session2">
+                            <p class="sessionP">Adresse mail introuvable.</p>
+                            <a id="cross"><i class="fas fa-times-circle"></i></a>
+                        </div>
+                    </div>';
+                }
+                die();
+            // Sinon on envoi un message
+            } else {
+                echo '<div id=session>
+                    <div id="session2">
+                        <p class="sessionP">Vous devez rentrer une adresse mail.</p>
+                        <a id="cross"><i class="fas fa-times-circle"></i></a>
+                    </div>
+                </div>';
+            }
+        }
+        $formPassword = new Form;
+        $formPassword->beginForm('POST',['id'=>'passwordLogin']);
+        $formPassword->addInput('mail','passwordMail',['placeholder'=>'Mail','id'=>'passwordMail']);
+        $formPassword->addInput('password','password',['placeholder'=>'Mot de passe','id'=>'newPassword']);
+        $formPassword->addInput('password','password2',['placeholder'=>'Confirmation mot de passe','id'=>'newPassword2']);
+        $formPassword->addButton('Confirmer',['class'=>'site-btn','id'=>'passwordButton']);
+        $formPassword->endForm();
+        $this->renderFront('user/forgotPassword',['formPassword'=>$formPassword->create()]);
     }
 }
