@@ -11,10 +11,10 @@
             <div class="signin__form">
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab" aria-selected="false">Connexion</a>
+                        <a id="login" class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab" aria-selected="false">Connexion</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab" aria-selected="false">S'inscrire</a>
+                        <a id="register" class="nav-link" data-toggle="tab" href="#tabs-2" role="tab" aria-selected="false">S'inscrire</a>
                     </li>
                 </ul>
                 <div class="tab-content">

@@ -105,7 +105,7 @@
             <div class="col-lg-3 col-md-3">
                 <?php if ($this->session->get('role') == false){ ?>
                 <div class="header__btn">
-                    <a href="/user/login" class="primary-btn">S'inscrire</a>
+                    <a href="/user/login" class="primary-btn" id="registerButton">S'inscrire</a>
                 </div>
                 <?php } ?>
             </div>
