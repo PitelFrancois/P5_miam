@@ -236,12 +236,26 @@ class RecipeController extends Controller {
                 // Si l'extension est autorisée
                 if (in_array($fileExtension, $extensionAutorised)) {
                     // On vérifie le poids de la photo
-                    if ($fileSize < 700000) {
+                    if ($fileSize < 3000000) {
                         if (move_uploaded_file($fileTmpName,$fileDest)) {
                             // On hydrate recipe
                             $recipe->setNamePicture($fileName);
                         }
+                    } else {
+                        echo '<div id=session>
+                            <div id="session2">
+                                <p class="sessionP">Le poid de votre photo est trop élevé.</p>
+                                <a id="cross"><i class="fas fa-times-circle"></i></a>
+                            </div>
+                        </div>';
                     }
+                } else {
+                    echo '<div id=session>
+                        <div id="session2">
+                            <p class="sessionP">L\'extension de votre photo n\'est pas autorisé.</p>
+                            <a id="cross"><i class="fas fa-times-circle"></i></a>
+                        </div>
+                    </div>'; 
                 }
             }
             // On récupère le userId
