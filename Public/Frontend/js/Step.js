@@ -86,6 +86,8 @@ class Step {
                 let howManyPeople = document.getElementById('howManyPeople');                               // On cible l'input #howManyPeople
                 let vegan = document.getElementById('vegan');                                               // On cible l'input #vegan
                 let category = document.getElementById('category');                                         // On cible l'input #category
+                window.localStorage.setItem('vegan',vegan.value);
+                window.localStorage.setItem('category',category.value);
                 if (category.value == ""){                                                                  // On vérifie que la valeur de #category ne soit pas vide
                     erreur = "Veuillez renseigner une catégorie.";                                              // Création du message d'erreur
                     this.inputBorder();                                                                         // On lance la méthode inputBorder
