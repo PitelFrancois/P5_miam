@@ -23,7 +23,7 @@ class UserController extends Controller {
         // Si un formulaire register est retourné
         if (Form::Validate($_POST,['registerPseudo','registerMail','registerMail2','registerPassword','registerPassword2'])) {
             // On protège les données reçu avec htmlspecialchars
-            $pseudo = htmlspecialchars($_POST['registerPseudo']);
+            $pseudo = htmlspecialchars(trim($_POST['registerPseudo']));
             $mail = htmlspecialchars($_POST['registerMail']);
             $mail2 = htmlspecialchars($_POST['registerMail2']);
             $password = htmlspecialchars($_POST['registerPassword']);
