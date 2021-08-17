@@ -352,17 +352,23 @@ class Step {
         let nextStep2Button = document.getElementById('nextStep2');                                 // On cible le bouton #nextStep2
         if (nextStep2Button != null){
             nextStep2Button.addEventListener('click',()=>{                                              // Quand on click dessus
-                let steps = window.localStorage.getItem('steps');                                           // On récupère steps                       
+                let steps = window.localStorage.getItem('steps');                                           // On récupère steps
                 let erreur;                                                                                 // Déclaration de la variable erreur
-                if(steps.length > 2){                                                                          // Si la taille de stps est plus grande que 2 
-                    this.step2.style.display = "none";                                                          // On donne un display none à #step2                                                                 
-                    this.step3.style.display = "block";                                                         // On donne un display block à #step3
-                    window.localStorage.setItem('currentPage',"3");                                             // On passe le currentPage à 3
-                    window.scrollTo(0,250);                                                                     // On fait défilé le doc à la hauteur voulu
+                if (steps != null){                                                                         // Si steps est différent de null
+                    if(steps.length > 2){                                                                       // Si la taille de stps est plus grande que 2 
+                        this.step2.style.display = "none";                                                          // On donne un display none à #step2                                                                 
+                        this.step3.style.display = "block";                                                         // On donne un display block à #step3
+                        window.localStorage.setItem('currentPage',"3");                                             // On passe le currentPage à 3
+                        window.scrollTo(0,250);                                                                     // On fait défilé le doc à la hauteur voulu
+                    } else {                                                                                    // Sinon
+                        erreur = "Vous devez remplir au moins une étape.";                                          // Création du message d'erreur
+                        document.getElementById('erreurStep2').innerHTML = erreur;                                  // on envoie un message dans #erreurStep2
+                    };
                 } else {                                                                                    // Sinon
                     erreur = "Vous devez remplir au moins une étape.";                                          // Création du message d'erreur
                     document.getElementById('erreurStep2').innerHTML = erreur;                                  // on envoie un message dans #erreurStep2
                 };
+                
             });
         };
     };
@@ -581,26 +587,38 @@ class Step {
     nextStep3(){
         let nextStep3Button = document.getElementById('nextStep3');                                 // On cible le bouton #nextStep2
         if (nextStep3Button != null){
-            nextStep3Button.addEventListener('click',()=>{                                              // Quand on click dessus
-                window.localStorage.setItem('currentPage',"4");                                             // On passe le currentPage à 3
-                let divStep3 = document.getElementById('divStep3');                                         // On cible la div #divStep3
-                let divStep4 = document.getElementById('divStep4');                                         // On cible la div #divStep4
-                let col1 = document.getElementById('col1');                                                 // On cible la div #col1
-                let col2 = document.getElementById('col2');                                                 // On cible la div #col2
-                let row1 = document.getElementById('row1');                                                 // On cible la div #row1
-                let row2 = document.getElementById('row2');                                                 // On cible la div #row2
-                col1.classList.remove('col-lg-8');                                                          // On retire une class a #col1
-                col1.classList.remove('col-md-8');                                                          // On retire une class a #col1
-                col2.classList.remove('col-lg-8');                                                          // On retire une class a #col2
-                col2.classList.remove('col-md-6');                                                          // On retire une class a #col2
-                row1.classList.remove('row');                                                               // On retire une class a #row1
-                row2.classList.remove('row');                                                               // On retire une class a #row2
-                divStep3.style.display = "none";                                                            // On donne un display none a #divStep3
-                divStep4.style.display = "block";                                                           // On donne un display block a #divStep4
-                this.deleteValue();                                                                         // On lance la méthode deleteValue
-                this.renderValue();                                                                         // On lance la méthode renderValue
-                this.renderForm();                                                                          // On lance la méthode renderForm
-                window.scrollTo(0,250);                                                                     // On fait défilé le doc à la hauteur voulu
+            nextStep3Button.addEventListener('click',(e)=>{                                              // Quand on click dessus
+                let ings = window.localStorage.getItem('ings');                                             // On récupère ings                       
+                let erreur;                                                                                 // Déclaration de la variable erreur
+                if (ings != null){                                                                          // Si ings est différent de null
+                    if(ings.length > 2){                                                                        // Si la taille de stps est plus grande que 2 
+                        window.localStorage.setItem('currentPage',"4");                                             // On passe le currentPage à 3
+                        let divStep3 = document.getElementById('divStep3');                                         // On cible la div #divStep3
+                        let divStep4 = document.getElementById('divStep4');                                         // On cible la div #divStep4
+                        let col1 = document.getElementById('col1');                                                 // On cible la div #col1
+                        let col2 = document.getElementById('col2');                                                 // On cible la div #col2
+                        let row1 = document.getElementById('row1');                                                 // On cible la div #row1
+                        let row2 = document.getElementById('row2');                                                 // On cible la div #row2
+                        col1.classList.remove('col-lg-8');                                                          // On retire une class a #col1
+                        col1.classList.remove('col-md-8');                                                          // On retire une class a #col1
+                        col2.classList.remove('col-lg-8');                                                          // On retire une class a #col2
+                        col2.classList.remove('col-md-6');                                                          // On retire une class a #col2
+                        row1.classList.remove('row');                                                               // On retire une class a #row1
+                        row2.classList.remove('row');                                                               // On retire une class a #row2
+                        divStep3.style.display = "none";                                                            // On donne un display none a #divStep3
+                        divStep4.style.display = "block";                                                           // On donne un display block a #divStep4
+                        this.deleteValue();                                                                         // On lance la méthode deleteValue
+                        this.renderValue();                                                                         // On lance la méthode renderValue
+                        this.renderForm();                                                                          // On lance la méthode renderForm
+                        window.scrollTo(0,250);                                                                     // On fait défilé le doc à la hauteur voulu
+                    } else {                                                                                        // Sinon
+                        erreur = "Vous devez ajouter au moins un ingrédient.";                                          // Création du message d'erreur
+                        document.getElementById('erreurStep3').innerHTML = erreur;                                      // on envoie un message dans #erreurStep2
+                    }; 
+                } else {                                                                                    // Sinon
+                    erreur = "Vous devez ajouter au moins un ingrédient.";                                      // Création du message d'erreur
+                    document.getElementById('erreurStep3').innerHTML = erreur;                                  // on envoie un message dans #erreurStep2
+                };   
             });
         };
     };
